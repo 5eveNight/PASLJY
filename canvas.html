@@ -1,0 +1,151 @@
+<html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>平安丝路 </title>
+    <style>
+        body {
+            font-family: sans-serif;
+            max-width: 1470px;
+            margin: 10px auto;
+            padding: 10px;
+            background-color: #f5f5f5;
+        }
+        .control-panel {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="text"] {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 16px;
+			margin-top: 5px;
+			margin-bottom: 5px;
+        }
+        .full-width { width: 25%; }
+        .row > div { flex: 1; }
+        .row input { width: 100%; }
+        .canvas-container {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 200px;
+        }
+        canvas {
+            max-width: 100%;
+            border: 1px dashed #ccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="control-panel">
+        <div class="control-group">
+            <label for="nameInput">姓名:</label>
+            <input type="text" id="nameInput" class="full-width" maxlength="10" placeholder="张三" value="张三">
+			<label for="dateInput">&emsp;日期:</label>
+            <input type="text" id="dateInput" class="full-width" maxlength="10" placeholder="2026年8月19日" value="2026年8月19日">
+			<label for="partInput">&emsp;期数:</label>
+            <input type="text" id="partInput" class="full-width" maxlength="10" placeholder="二十四期" value="二十四期"><br>
+			<label for="lessonInput">课程:</label>
+            <input type="text" id="lessonInput" class="full-width" maxlength="10" placeholder="建设安全保障" value="建设安全保障">
+			<label for="certnoInput">&emsp;编号:</label>
+            <input type="text" id="certnoInput" class="full-width" maxlength="10" placeholder="PASLJY202608" value="PASLJY202608"><span>&emsp;&emsp;&emsp;&emsp;右键-图片另存为...</span>
+        </div>
+    </div>
+
+    <div class="canvas-container">
+        <canvas id="myCanvas"></canvas>
+    </div>
+
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        const imgUrlInput = document.getElementById('imgUrlInput');
+        const nameInput = document.getElementById('nameInput');
+		const dateInput = document.getElementById('dateInput');
+		const partInput = document.getElementById('partInput');
+		const lessonInput = document.getElementById('lessonInput');
+		const certnoInput = document.getElementById('certnoInput');
+const img = new Image();
+img.src = 'base.png';
+img.onload = function() {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+	currentImage = img
+	renderCanvas();
+};
+
+        [nameInput, dateInput, partInput, lessonInput, certnoInput].forEach(input => {
+            input.addEventListener('input', function() {
+                if (currentImage) renderCanvas();
+            });
+        });
+
+        function renderCanvas() {
+            if (!currentImage) return;
+            canvas.width = currentImage.naturalWidth;
+            canvas.height = currentImage.naturalHeight;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.drawImage(currentImage, 0, 0, canvas.width, canvas.height);
+            const fontSize = 60;
+			
+            const name = nameInput.value;
+			const date = dateInput.value;
+            if (name.trim() !== '') {
+			if (date.trim() !== '') {
+                let nameX = 207;
+                let nameY = 440;
+                ctx.font = ` ${fontSize}px "微软雅黑", sans-serif`;
+				ctx.letterSpacing = "2px"; 
+                ctx.fillStyle = '#333333';
+                ctx.fillText(name+"于"+date+"在本网学习", nameX, nameY);
+				}
+            }
+            const part = partInput.value;
+            if (part.trim() !== '') {
+                let partX = 270;
+                let partY = 528;
+                ctx.font = ` ${fontSize}px "微软雅黑", sans-serif`;
+				ctx.letterSpacing = "2px"; 
+                ctx.fillStyle = '#a8021a';
+                ctx.fillText(part, partX, partY);
+            }
+			const lesson = lessonInput.value;
+            if (lesson.trim() !== '') {
+                let lessonX = 888;
+                let lessonY = 528;
+                ctx.font = ` ${fontSize}px "微软雅黑", sans-serif`;
+				ctx.letterSpacing = "2px"; 
+                ctx.fillStyle = '#a8021a';
+                ctx.fillText(lesson, lessonX, lessonY);
+            }
+			const certno = certnoInput.value;
+            if (certno.trim() !== '') {
+                let certnoX = 233;
+                let certnoY = 930;
+                ctx.font = ` 54px "微软雅黑", sans-serif`;
+				ctx.letterSpacing = "-1px"; 
+                ctx.fillStyle = '#a6a6a6';
+                ctx.fillText("证字第号:  "+certno, certnoX, certnoY);
+            }
+        }
+    </script>
+</body>
+</html>
