@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平安丝路</title>
+<style>
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: #f2f2f2;
+  }
+
+  .controls {
+    width: 1200px;
+    margin: 10px auto 0;
+    padding: 10px 12px;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    font-size: 40px;
+  }
+
+  .controls input {
+    width: 400px;
+    height: 60px;
+    padding: 4px 8px;
+    margin: 0 10px;
+    border: 1px solid #bbb;
+    border-radius: 3px;
+    font-size: 40px;
+  }
+
+  .controls button {
+    margin-left:15%;
+    height: 60px;
+    padding: 0 12px;
+    border: 1px solid #b71c1c;
+    border-radius: 3px;
+    background: #c91818;
+    color: #fff;
+    cursor: pointer;
+    font-size: 40px;
+  }
+
+  .controls button:hover {
+    background: #a91515;
+  }
+
+  .certificate {
+    position: relative;
+    width: 1470px;
+    height: 1029px;
+    margin: 20px auto;
+    overflow: hidden;
+    background: #fff;
+    font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", Arial, sans-serif;
+    color: #333;
+  }
+
+  .content {
+    position: absolute;
+    left: 57px;
+    top: 104px;
+    width: 1490px;
+	height: 1029px;
+    font-size: 62px;
+    color:#333333;
+	margin-left: 7.9%;
+	margin-top: 15.8%;
+  }
+  .content p {
+    margin: 37px;
+  }
+    .red {
+	position: absolute;
+    color: #a8021a;
+    font-size: 62px;
+	margin-left: 6.4%;
+	margin-top:-1.9%;
+    letter-spacing: .3px;
+  }
+      .redlesson {
+	position: absolute;
+    color: #a8021a;
+    font-size: 62px;
+	margin-left: 48.1%;
+	margin-top:-1.9%;
+    letter-spacing: .2px;
+  }
+  .cert-no {
+    position: absolute;
+
+    color: #a6a6a6;
+    font-size: 52px;
+	margin-left: 16%;
+	margin-top:-11%;
+  }
+</style>
+</head>
+<body>
+  <div class="controls">
+    <label for="nameInput">姓名：</label>
+    <input id="nameInput" type="text" value="张三" maxlength="20" autocomplete="off">
+	<label for="timeInput">|  日期：</label>
+    <input id="timeInput" type="text" value="2026年8月16日" maxlength="30" autocomplete="off"><hr>
+	<label for="partInput">期数：</label>
+    <input id="partInput" type="text" value="二十四期" maxlength="30" autocomplete="off">
+	<label for="lessonInput">|  课程：</label>
+    <input id="lessonInput" type="text" value="建设安全保障" maxlength="30" autocomplete="off"><hr>
+	<label for="certnoInput">编号：</label>
+    <input id="certnoInput" type="text" value="PASLJY202608" maxlength="20" autocomplete="off">
+    <button type="button" onclick="updateAll()">更新</button>
+  </div>
+
+  <div class="certificate">
+    <div class="watermark"></div>
+<img src="base.png">
+
+    <div class="content">
+    <p><span id="name">张三</span>于<span id="time">2026年8月16日</span>在本网学习</p>
+    <span class="red" id="part">二十四期</span><span class="redlesson" id="lesson">建设安全保障</span>
+	</div>
+    <div class="cert-no">证字第号: <span id="certno">PASLJY202608</span></div>
+  </div>
+  <script>
+    function updateAll() {
+      const inputA = document.getElementById("nameInput");
+      const name = inputA.value.trim();
+      document.getElementById("name").textContent = name || "张三";
+      const inputB = document.getElementById("timeInput");
+      const time = inputB.value.trim();
+      document.getElementById("time").textContent = time || "2026年8月16日";
+      const inputC = document.getElementById("partInput");
+      const part = inputC.value.trim();
+      document.getElementById("part").textContent = part || "二十四期";
+      const inputD = document.getElementById("lessonInput");
+      const lesson = inputD.value.trim();
+      document.getElementById("lesson").textContent = lesson || "建设安全保障";
+      const inputE = document.getElementById("certnoInput");
+      const certno = inputE.value.trim();
+      document.getElementById("certno").textContent = certno || "PASLJY202608";
+    }
+
+/*document.getElementById("nameInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        updateName();
+      }
+    });*/
+  </script>
+</body>
+</html>
