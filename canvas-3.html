@@ -165,7 +165,8 @@
 			exportBtn.addEventListener('click',function() {
 				const dataURL = canvas.toDataURL('image/png');
 				const link = document.createElement('a');
-				link.download = nameInput.value + '.png';
+				const name = nameInput.value.trim() || "张三";
+				link.download = name + '.png';
 				link.href = dataURL;
 				link.click();
 			});
